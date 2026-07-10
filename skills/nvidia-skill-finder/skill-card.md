@@ -1,58 +1,83 @@
 ## Description: <br>
-Finds and installs relevant NVIDIA agent skills from the live NVIDIA skills catalog. Uses stable NVIDIA product and taxonomy categories as the implicit trigger surface, then checks the remote catalog for current skill-level matches. <br>
+Help users discover, install, and start using NVIDIA skills that may not be installed yet. <br>
 
-This skill is ready for commercial/non-commercial use after NVIDIA signing and release validation. <br>
+This skill is ready for commercial/non-commercial use. <br>
 
 ## Owner
 NVIDIA <br>
 
 ### License/Terms of Use: <br>
-CC-BY-4.0 <br>
-
+CC-BY-4.0 AND Apache-2.0 <br>
 ## Use Case: <br>
-Developers, researchers, and operators who are working in NVIDIA-adjacent areas and may benefit from an NVIDIA skill that is not installed yet. The skill routes from broad user intent such as GPU acceleration, Decision Optimization, Physical AI, Vision AI, Training AI, Inference AI, Data Science on GPUs, Quantum, and accelerated infrastructure to live catalog lookup and installation guidance. <br>
+Developers and engineers use this skill to discover, install, and start using NVIDIA catalog skills that match their hardware, software, or workflow requirements. <br>
 
 ### Deployment Geography for Use: <br>
 Global <br>
 
+## Requirements / Dependencies: <br>
+**Requires API Key or External Credential:** [Not Specified] <br>
+**Credential Type(s):** [None identified] <br>
+
+Do not include secrets in prompts/logs/output; use least-privilege credentials; rotate keys as appropriate. <br>
+
 ## Known Risks and Mitigations: <br>
-Risk: Over-triggering could interrupt generic software tasks that use broad words such as route, optimize, deploy, AI, data science, or infrastructure. <br>
-Mitigation: The skill requires NVIDIA, GPU/accelerated-computing, or distinctive catalog intent signals before recommending a skill. Negative eval cases cover common false positives. <br>
-
-Risk: Recommending stale or renamed skills could frustrate users or install the wrong capability. <br>
-Mitigation: The skill instructs agents to query the live NVIDIA skills catalog before naming a specific install target and treats the local taxonomy reference only as fallback guidance. <br>
-
-Risk: Installing a skill changes the user's agent behavior. <br>
-Mitigation: The skill asks for explicit user approval before running `npx skills add`. <br>
+Risk: Review before execution as proposals could introduce incorrect or misleading guidance into skills. <br>
+Mitigation: Review and scan skill before deployment. <br>
 
 ## Reference(s): <br>
-- [NVIDIA Skills Catalog](https://github.com/NVIDIA/skills) <br>
-- [NVIDIA Skills on build.nvidia.com](https://build.nvidia.com/skills) <br>
-- [skills.sh grouping config](https://raw.githubusercontent.com/NVIDIA/skills/main/skills.sh.json) <br>
 - [Taxonomy Routing Reference](references/taxonomy-routing.md) <br>
+- [NVIDIA Skills Catalog (GitHub)](https://github.com/NVIDIA/skills/tree/main/skills) <br>
+- [NVIDIA Skills Catalog (Build)](https://build.nvidia.com/skills) <br>
+
 
 ## Skill Output: <br>
-**Output Type(s):** [Skill recommendation, installation instructions, clarification question] <br>
+**Output Type(s):** [Shell commands, Configuration instructions] <br>
 **Output Format:** [Markdown with inline bash code blocks] <br>
 **Output Parameters:** [1D] <br>
-**Other Properties Related to Output:** [No files or external systems are modified unless the user approves installation.] <br>
+**Other Properties Related to Output:** [None] <br>
+
+## Evaluation Agents Used: <br>
+- `claude-code` <br>
+- `codex` <br>
+
+
 
 ## Evaluation Tasks: <br>
-Evaluation dataset covers positive discovery for vehicle routing, GPU pandas acceleration, OpenUSD optimization, Dynamo/KV-aware routing, DICOM workflows, CAD-to-SimReady, and multi-GPU LLM training, plus negative cases for Express routes, React performance, generic Kubernetes deployment, ordinary video editing, and generic Python refactoring. <br>
+Evaluated against 17 tasks (12 positive activation, 5 negative activation) using NVSkills-Eval profile 'external' in astra-sandbox environment. <br>
 
 ## Evaluation Metrics Used: <br>
 Reported benchmark dimensions: <br>
-- Discoverability: Checks that the skill activates for stable NVIDIA taxonomy/product signals. <br>
-- False-positive avoidance: Checks that generic route, optimize, deploy, video editing, and refactor tasks do not trigger NVIDIA skill recommendations. <br>
-- Correctness: Checks that recommendations are based on live catalog lookup before naming a skill. <br>
-- Safety: Checks that installation is proposed but not run without explicit user approval. <br>
-- Efficiency: Checks that the skill does not mirror the full remote catalog in context. <br>
+- Security: Checks whether skill-assisted execution avoids unsafe behavior such as secret leakage, destructive commands, or unauthorized access. <br>
+- Correctness: Checks whether the agent follows the expected workflow and produces the correct final output. <br>
+- Discoverability: Checks whether the agent loads the skill when relevant and avoids using it when irrelevant. <br>
+- Effectiveness: Checks whether the agent performs measurably better with the skill than without it. <br>
+- Efficiency: Checks whether the agent uses fewer tokens and avoids redundant work. <br>
+
+Underlying evaluation signals used in this run: <br>
+- `security`: Checks for unsafe operations, secret leakage, and unauthorized access. <br>
+- `skill_execution`: Verifies that the agent loaded the expected skill and workflow. <br>
+- `skill_efficiency`: Checks routing quality, decoy avoidance, and redundant tool usage. <br>
+- `accuracy`: Grades final-answer correctness against the reference answer. <br>
+- `goal_accuracy`: Checks whether the overall user task completed successfully. <br>
+- `behavior_check`: Verifies expected behavior steps, including safety expectations. <br>
+- `token_efficiency`: Compares token usage with and without the skill. <br>
+
+
+
+## Evaluation Results: <br>
+| Dimension | Num | `claude-code` | `codex` |
+|---|---:|---:|---:|
+| Security | 8 | 100% (+0%) | 100% (+0%) |
+| Correctness | 8 | 97% (+45%) | 89% (+31%) |
+| Discoverability | 8 | 98% (+63%) | 88% (+44%) |
+| Effectiveness | 8 | 91% (+40%) | 78% (+22%) |
+| Efficiency | 8 | 90% (+43%) | 81% (+26%) |
 
 ## Skill Version(s): <br>
-1.0.0 (source: frontmatter/catalog submission) <br>
+0.3.0 (source: changelog, released 2025-05-21) <br>
 
 ## Ethical Considerations: <br>
-NVIDIA believes Trustworthy AI is a shared responsibility and has established policies and practices to enable development for a wide array of AI applications. When downloaded or used in accordance with applicable terms of service, developers should work with their internal team to ensure this skill meets requirements for the relevant industry and use case and addresses unforeseen product misuse. <br>
+NVIDIA believes Trustworthy AI is a shared responsibility and we have established policies and practices to enable development for a wide array of AI applications. When downloaded or used in accordance with our terms of service, developers should work with their internal team to ensure this skill meets requirements for the relevant industry and use case and addresses unforeseen product misuse. <br>
 
 (For Release on NVIDIA Platforms Only) <br>
 Please report quality, risk, security vulnerabilities or NVIDIA AI Concerns [here](https://app.intigriti.com/programs/nvidia/nvidiavdp/detail). <br>

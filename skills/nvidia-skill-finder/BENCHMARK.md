@@ -1,20 +1,24 @@
 # Evaluation Report
 
-Evaluation of the `skill` skill before publication through NVSkills-Eval.
+Evaluation of the `nvidia-skill-finder` skill before publication through NVSkills-Eval.
 
 This benchmark summarizes 3-Tier Evaluation from NVSkills-Eval results for the skill. The goal is to document whether the skill is safe, discoverable, effective, and useful for agents before it is published for broader workflow use.
 
 ## Evaluation Summary
 
-- Skill: `skill`
-- Evaluation date: 2026-06-25
+- Skill: `nvidia-skill-finder`
+- Evaluation date: 2026-07-10
 - NVSkills-Eval profile: `external`
+- Environment: `astra-sandbox`
+- Dataset: 17 evaluation tasks
+- Attempts per task: 1
+- Pass threshold: 50%
 - Overall verdict: PASS
-- Tier 3 live agent evaluation: not available in this report
 
 ## Agents Used
 
-- Tier 3 agent details were not available in this report.
+- `claude-code`
+- `codex`
 
 ## Metrics Used
 
@@ -28,26 +32,45 @@ Reported benchmark dimensions:
 
 Underlying evaluation signals used in this run:
 
-- No Tier 3 evaluation signal details were available in this report.
+- `security` (Security): checks for unsafe operations, secret leakage, and unauthorized access.
+- `skill_execution` (Skill Execution): verifies that the agent loaded the expected skill and workflow.
+- `skill_efficiency` (Efficiency): checks routing quality, decoy avoidance, and redundant tool usage.
+- `accuracy` (Accuracy): grades final-answer correctness against the reference answer.
+- `goal_accuracy` (Goal Accuracy): checks whether the overall user task completed successfully.
+- `behavior_check` (Behavior Check): verifies expected behavior steps, including safety expectations.
+- `token_efficiency` (Token Efficiency): compares token usage with and without the skill.
 
 ## Test Tasks
 
-Tier 3 evaluation task details were not available in this report.
+The benchmark dataset contained 17 evaluation tasks:
+
+- Positive tasks: 12 tasks where the skill was expected to activate.
+- Negative tasks: 5 tasks where no skill was expected.
+- Unlabeled tasks: 0 tasks where positive/negative intent could not be inferred.
+
+Task composition is derived from the evaluation dataset when possible. Entries with `expected_skill` set are treated as positive skill-activation cases, while entries with `expected_skill: null` are treated as negative activation cases.
 
 ## Results
 
-Tier 3 dimension rollup was not available in this report.
+| Dimension | Num | `claude-code` | `codex` |
+|---|---:|---:|---:|
+| Security | 8 | 100% (+0%) | 100% (+0%) |
+| Correctness | 8 | 97% (+45%) | 89% (+31%) |
+| Discoverability | 8 | 98% (+63%) | 88% (+44%) |
+| Effectiveness | 8 | 91% (+40%) | 78% (+22%) |
+| Efficiency | 8 | 90% (+43%) | 81% (+26%) |
+
+Score values show skill-assisted performance. Values in parentheses show uplift versus the no-skill baseline when baseline data is available.
 
 ## Tier 1: Static Validation Summary
 
-Tier 1 validation passed with observations. NVSkills-Eval ran 9 checks and found 4 total findings.
+Tier 1 validation passed with observations. NVSkills-Eval ran 1 checks and found 3 total findings.
 
 Top findings:
 
-- LOW QUALITY/quality_discoverability: Description very long (718 chars, recommend 50-150) (`[nvidia-skill-finder] skills/nvidia-skill-finder/SKILL.md`)
-- LOW QUALITY/quality_reliability: No prerequisites/requirements documented (`[nvidia-skill-finder] skills/nvidia-skill-finder/SKILL.md`)
-- LOW QUALITY/quality_reliability: No limitations documented (`[nvidia-skill-finder] skills/nvidia-skill-finder/SKILL.md`)
-- LOW QUALITY/quality_reliability: No troubleshooting section documented (`[nvidia-skill-finder] skills/nvidia-skill-finder/SKILL.md`)
+- MEDIUM SCHEMA/body_recommended_section: Missing recommended section: '## Examples' (`skills/nvidia-skill-finder/SKILL.md`)
+- LOW SCHEMA/unexpected_file: Unexpected 'agents' in skill root (`skills/nvidia-skill-finder/agents`)
+- LOW SCHEMA/author_format: Author must be of the form 'Name <email@host>' (`skills/nvidia-skill-finder/SKILL.md`)
 
 ## Tier 2: Deduplication Summary
 
