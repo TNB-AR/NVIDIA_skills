@@ -66,18 +66,19 @@ obvious product-name matches, go directly to live catalog lookup.
 ## Implicit Invocation Constraints
 
 Implicit invocation is intentional: this skill acts as a NVIDIA capability
-detector and catalog router. Keep that behavior tightly scoped.
+detector and catalog router. This scopes the skill to NVIDIA relevance; it does
+not narrow it. Use the full trigger breadth in "When to Use this Skill" —
+including the softer "how do I do X" triggers and any request plausibly related
+to an NVIDIA product area or catalog taxonomy lane.
 
-Activate implicitly only when the request has at least one strong signal from
-the "When to Use this Skill" section, such as NVIDIA/CUDA/GPU language, a
-specific NVIDIA product name, or a distinctive NVIDIA catalog workflow.
+The gate is relevance, not consent. Do not activate for the generic software
+tasks in "When Not to Use this Skill" unless they also carry an NVIDIA, GPU,
+accelerated-computing, or distinctive NVIDIA workflow signal.
 
-Do not activate implicitly for the generic software tasks listed in "When Not to
-Use this Skill" unless the request also includes NVIDIA, GPU,
-accelerated-computing, or a distinctive NVIDIA workflow signal.
-
-Never install or modify skills without explicit user approval. A catalog match
-is only a recommendation until the user confirms installation.
+Recommending a skill is always allowed once the request is relevant. Installing
+or modifying skills is not: never run an install (e.g. `npx skills add`) or
+change agent capabilities without explicit user approval. A catalog match is
+only a recommendation until the user confirms.
 
 ## When Not to Use this Skill
 Stay quiet when the request is generic:
