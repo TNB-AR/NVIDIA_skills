@@ -63,6 +63,22 @@ Read [references/taxonomy-routing.md](references/taxonomy-routing.md) only when
 the request is taxonomy-only, ambiguous, or needs browse/domain mapping. For
 obvious product-name matches, go directly to live catalog lookup.
 
+## Implicit Invocation Constraints
+
+Implicit invocation is intentional: this skill acts as a NVIDIA capability
+detector and catalog router. Keep that behavior tightly scoped.
+
+Activate implicitly only when the request has at least one strong signal from
+the "When to Use this Skill" section, such as NVIDIA/CUDA/GPU language, a
+specific NVIDIA product name, or a distinctive NVIDIA catalog workflow.
+
+Do not activate implicitly for the generic software tasks listed in "When Not to
+Use this Skill" unless the request also includes NVIDIA, GPU,
+accelerated-computing, or a distinctive NVIDIA workflow signal.
+
+Never install or modify skills without explicit user approval. A catalog match
+is only a recommendation until the user confirms installation.
+
 ## When Not to Use this Skill
 Stay quiet when the request is generic:
 

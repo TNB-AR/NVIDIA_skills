@@ -4,16 +4,4 @@ interface:
   default_prompt: "Use $nvidia-skill-finder to find the right NVIDIA agent skill for my task."
 
 policy:
-  # Implicit invocation is intentional (capability detector / catalog router),
-  # but it is scoped: the skill only activates on NVIDIA/GPU/accelerated-computing
-  # signals and must never install without explicit user approval.
   allow_implicit_invocation: true
-  activation_constraints:
-    require_signals:
-      - NVIDIA, CUDA, or GPU/accelerated-computing mention
-      - strong NVIDIA product name (NeMo, Omniverse, cuOpt, Jetson, TAO, VSS, Dynamo, ...)
-      - distinctive NVIDIA task/taxonomy intent (see SKILL.md "When to Use this Skill")
-    suppress_when:
-      - generic route/optimize/deploy/AI/video/data-science wording without NVIDIA or GPU context
-        (see SKILL.md "When Not to Use this Skill")
-  install_requires_user_confirmation: true
