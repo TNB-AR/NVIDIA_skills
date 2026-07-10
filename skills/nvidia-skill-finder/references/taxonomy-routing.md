@@ -66,18 +66,8 @@ configuration, Jetson MGBE workflows, and cluster network troubleshooting.
 
 ## False-Positive Checks
 
-Do not route generic software tasks to NVIDIA only because they contain common
-words:
-
-- route: HTTP routes, web framework routes, load balancer routes without GPU or
-  NVIDIA context
-- optimize: React, CSS, SQL, bundle size, generic Python speedups without GPU
-  or accelerated-computing context
-- deploy: ordinary Kubernetes, cloud service, web app, or CI/CD deployment
-- AI: generic chatbot, generic prompt engineering, or non-NVIDIA model use
-- video: ordinary trimming, captions, export, or social-media editing
-- data science: local pandas cleanup, plotting, or sklearn work without GPU,
-  scale, RAPIDS, cuDF, or accelerated-computing context
-
-When in doubt, answer the user's task first and offer NVIDIA skill discovery as
-an optional next step.
+See SKILL.md § "When Not to Use this Skill" for the authoritative list of
+generic terms (route, optimize, deploy, AI, video, data science) that must not
+trigger NVIDIA routing without GPU/accelerated-computing context. When in doubt,
+answer the user's task first and offer NVIDIA skill discovery as an optional
+next step.
